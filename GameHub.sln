@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub", "GameHub\GameHub.csproj", "{90595237-C551-4F96-94AE-84BE5CC5FC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub.WebApi", "GameHub\GameHub.WebApi.csproj", "{90595237-C551-4F96-94AE-84BE5CC5FC40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Test", "..\GameHub.Test\GameHub.Test.csproj", "{50807B80-A258-47C9-9C3D-9237D6362C53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{90595237-C551-4F96-94AE-84BE5CC5FC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90595237-C551-4F96-94AE-84BE5CC5FC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90595237-C551-4F96-94AE-84BE5CC5FC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50807B80-A258-47C9-9C3D-9237D6362C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50807B80-A258-47C9-9C3D-9237D6362C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50807B80-A258-47C9-9C3D-9237D6362C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50807B80-A258-47C9-9C3D-9237D6362C53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
