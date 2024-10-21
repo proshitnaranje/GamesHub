@@ -7,7 +7,7 @@ namespace GameHub.Repository
         Task<Game?> GetGameAsync(int id);
 
         Task<IEnumerable<Game>> GetGamesAsync();
-        
+        Task<(IEnumerable<Game>, int)> GetGamesByPaginationAsync(int pageNumber, int pageSize);
         Task<bool> GameExistsAsync(int id);
         void AddGame(Game game);
         void UpdateGame(Game game);

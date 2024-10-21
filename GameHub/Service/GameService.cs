@@ -17,16 +17,17 @@ namespace GameHub.Service
 
             return _mapper.Map<GameInfoDto>(game);
         }
-
+        public async Task<IEnumerable<GameInfoDto>> GetGamesAsync()
+        {
+            var games = await _gamesRepository.GetGamesAsync();
+            return _mapper.Map<IEnumerable<GameInfoDto>>(games);
+        }
         public async Task<(IEnumerable<GameInfoDto>, PaginationMetadata)> GetGamesDetailsAsync(int pageNumber, int pageSize)
         {
             // collection to start from
-            var collection = await _gamesRepository.GetGamesAsync();
-            var totalItemCount = collection?.Count() ?? 0;
-            var paginationMetadata = new PaginationMetadata(totalItemCount, pageSize, pageNumber);
-            var collectionToReturn = collection?.Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize).ToList();
-            var finalcollection = _mapper.Map<IEnumerable<GameInfoDto>>(collectionToReturn);
+            var collection = await _gamesRepository.GetGamesByPaginationAsync(pageNumber, pageSize);
+            var paginationMetadata = new PaginationMetadata(collection.Item2, pageSize, pageNumber);
+            var finalcollection = _mapper.Map<IEnumerable<GameInfoDto>>(collection.Item1);
             return (finalcollection, paginationMetadata);
         }
        

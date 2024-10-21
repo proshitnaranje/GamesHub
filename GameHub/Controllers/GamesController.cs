@@ -14,6 +14,19 @@ namespace GameHub.Controllers
     {
         private readonly IGameService _gameService = gameService ??
             throw new ArgumentNullException(nameof(gameService));
+        
+        /// <summary>
+        /// Retrieves games information
+        /// </summary>
+        /// <returns>Returns the games information if found; otherwise, returns NotFound (404).</returns>
+        [HttpGet]
+        
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<GameInfoDto>>> GetGames()
+        {
+            var games = await _gameService.GetGamesAsync();
+            return Ok(games);
+        }
 
         /// <summary>
         /// Retrieves game information by game ID.
@@ -33,16 +46,17 @@ namespace GameHub.Controllers
             return Ok(game);
         }
 
+        
         /// <summary>
         /// Retrieves games collection  by provided pagination values .
         /// </summary>
         /// <param name="pageNumber">The pageNumber of the game collection list to retrieve.</param>
         /// <param name="pageSize">The pageSize total number of records expected in collection response.</param>
         /// <returns>Returns the game information if found; otherwise, returns NotFound (404).</returns>
-        [HttpGet()]
+        [HttpGet("page")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<GameInfoDto>>> GetGames(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<GameInfoDto>>> GetGamesDetailsByPagination([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             if(pageNumber < 1 || pageSize < 1)
                 return BadRequest();

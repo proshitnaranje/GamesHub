@@ -1,5 +1,7 @@
 ﻿using GameHub.DbContexts;
 using GameHub.Entities;
+using GameHub.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameHub.Repository
@@ -18,6 +20,18 @@ namespace GameHub.Repository
             return await _context.Games.ToListAsync();
         }
 
+        public async Task<(IEnumerable<Game>, int)> GetGamesByPaginationAsync(int pageNumber, int pageSize)
+        {
+            // Calculate the number of items to skip
+            int skipAmount = (pageNumber - 1) * pageSize;
+
+            // Retrieve paginated data
+            var paginatedGames = await _context.Games
+                                               .Skip(skipAmount)
+                                               .Take(pageSize)
+                                               .ToListAsync();
+            return (paginatedGames, _context.Games.Count());
+        }
         public async Task<bool> GameExistsAsync(int id)
         {
             return await _context.Games.AnyAsync(g => g.ID == id);
